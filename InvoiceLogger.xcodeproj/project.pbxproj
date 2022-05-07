@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */; };
 		2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */; };
-		2ECB626328267DE9002EC4C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626228267DE9002EC4C0 /* ViewController.swift */; };
 		2ECB626828267DEC002EC4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626728267DEC002EC4C0 /* Assets.xcassets */; };
 		2ECB627628267DED002EC4C0 /* InvoiceLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB627528267DED002EC4C0 /* InvoiceLoggerTests.swift */; };
 		2ECB628028267DED002EC4C0 /* InvoiceLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB627F28267DED002EC4C0 /* InvoiceLoggerUITests.swift */; };
 		2ECB628228267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB628128267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift */; };
 		2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB628E28267E1B002EC4C0 /* Coordinator.swift */; };
 		2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB629028267E39002EC4C0 /* MainCoordinator.swift */; };
+		2ECB62952826C79B002EC4C0 /* InvoicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62942826C79B002EC4C0 /* InvoicesTableViewController.swift */; };
+		2ECB62982826C7FD002EC4C0 /* InvoiceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62972826C7FD002EC4C0 /* InvoiceCell.swift */; };
+		2ECB629A2826C88A002EC4C0 /* InvoicesTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62992826C88A002EC4C0 /* InvoicesTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +41,6 @@
 		2ECB625B28267DE9002EC4C0 /* InvoiceLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2ECB626228267DE9002EC4C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2ECB626728267DEC002EC4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2ECB626C28267DEC002EC4C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ECB627128267DED002EC4C0 /* InvoiceLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InvoiceLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,6 +50,9 @@
 		2ECB628128267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2ECB628E28267E1B002EC4C0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		2ECB629028267E39002EC4C0 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		2ECB62942826C79B002EC4C0 /* InvoicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTableViewController.swift; sourceTree = "<group>"; };
+		2ECB62972826C7FD002EC4C0 /* InvoiceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCell.swift; sourceTree = "<group>"; };
+		2ECB62992826C88A002EC4C0 /* InvoicesTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +103,10 @@
 		2ECB625D28267DE9002EC4C0 /* InvoiceLogger */ = {
 			isa = PBXGroup;
 			children = (
+				2ECB62962826C7CF002EC4C0 /* HomePage */,
 				2ECB62922826C26C002EC4C0 /* Coordinator */,
 				2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */,
 				2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */,
-				2ECB626228267DE9002EC4C0 /* ViewController.swift */,
 				2ECB626728267DEC002EC4C0 /* Assets.xcassets */,
 				2ECB626C28267DEC002EC4C0 /* Info.plist */,
 			);
@@ -133,6 +137,16 @@
 				2ECB628E28267E1B002EC4C0 /* Coordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		2ECB62962826C7CF002EC4C0 /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				2ECB62942826C79B002EC4C0 /* InvoicesTableViewController.swift */,
+				2ECB62992826C88A002EC4C0 /* InvoicesTableView.swift */,
+				2ECB62972826C7FD002EC4C0 /* InvoiceCell.swift */,
+			);
+			path = HomePage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,8 +278,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECB62952826C79B002EC4C0 /* InvoicesTableViewController.swift in Sources */,
+				2ECB62982826C7FD002EC4C0 /* InvoiceCell.swift in Sources */,
+				2ECB629A2826C88A002EC4C0 /* InvoicesTableView.swift in Sources */,
 				2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */,
-				2ECB626328267DE9002EC4C0 /* ViewController.swift in Sources */,
 				2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */,
 				2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */,
 				2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */,

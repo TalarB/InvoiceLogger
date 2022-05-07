@@ -16,7 +16,7 @@ class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let vc = UIViewController()
+        let vc = InvoicesTableViewController()
         navigationController.pushViewController(vc, animated: false)
     }
 }

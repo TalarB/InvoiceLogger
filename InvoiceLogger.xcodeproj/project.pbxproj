@@ -10,12 +10,12 @@
 		2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */; };
 		2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */; };
 		2ECB626328267DE9002EC4C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626228267DE9002EC4C0 /* ViewController.swift */; };
-		2ECB626628267DE9002EC4C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626428267DE9002EC4C0 /* Main.storyboard */; };
 		2ECB626828267DEC002EC4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626728267DEC002EC4C0 /* Assets.xcassets */; };
-		2ECB626B28267DEC002EC4C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626928267DEC002EC4C0 /* LaunchScreen.storyboard */; };
 		2ECB627628267DED002EC4C0 /* InvoiceLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB627528267DED002EC4C0 /* InvoiceLoggerTests.swift */; };
 		2ECB628028267DED002EC4C0 /* InvoiceLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB627F28267DED002EC4C0 /* InvoiceLoggerUITests.swift */; };
 		2ECB628228267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB628128267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift */; };
+		2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB628E28267E1B002EC4C0 /* Coordinator.swift */; };
+		2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB629028267E39002EC4C0 /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,15 +40,15 @@
 		2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2ECB626228267DE9002EC4C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2ECB626528267DE9002EC4C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2ECB626728267DEC002EC4C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2ECB626A28267DEC002EC4C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2ECB626C28267DEC002EC4C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2ECB627128267DED002EC4C0 /* InvoiceLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InvoiceLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECB627528267DED002EC4C0 /* InvoiceLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceLoggerTests.swift; sourceTree = "<group>"; };
 		2ECB627B28267DED002EC4C0 /* InvoiceLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InvoiceLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECB627F28267DED002EC4C0 /* InvoiceLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceLoggerUITests.swift; sourceTree = "<group>"; };
 		2ECB628128267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2ECB628E28267E1B002EC4C0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		2ECB629028267E39002EC4C0 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +99,11 @@
 		2ECB625D28267DE9002EC4C0 /* InvoiceLogger */ = {
 			isa = PBXGroup;
 			children = (
+				2ECB62922826C26C002EC4C0 /* Coordinator */,
 				2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */,
 				2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */,
 				2ECB626228267DE9002EC4C0 /* ViewController.swift */,
-				2ECB626428267DE9002EC4C0 /* Main.storyboard */,
 				2ECB626728267DEC002EC4C0 /* Assets.xcassets */,
-				2ECB626928267DEC002EC4C0 /* LaunchScreen.storyboard */,
 				2ECB626C28267DEC002EC4C0 /* Info.plist */,
 			);
 			path = InvoiceLogger;
@@ -125,6 +124,15 @@
 				2ECB628128267DED002EC4C0 /* InvoiceLoggerUITestsLaunchTests.swift */,
 			);
 			path = InvoiceLoggerUITests;
+			sourceTree = "<group>";
+		};
+		2ECB62922826C26C002EC4C0 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2ECB629028267E39002EC4C0 /* MainCoordinator.swift */,
+				2ECB628E28267E1B002EC4C0 /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,9 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ECB626B28267DEC002EC4C0 /* LaunchScreen.storyboard in Resources */,
 				2ECB626828267DEC002EC4C0 /* Assets.xcassets in Resources */,
-				2ECB626628267DE9002EC4C0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,8 +264,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */,
 				2ECB626328267DE9002EC4C0 /* ViewController.swift in Sources */,
 				2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */,
+				2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */,
 				2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,25 +303,6 @@
 			targetProxy = 2ECB627C28267DED002EC4C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2ECB626428267DE9002EC4C0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2ECB626528267DE9002EC4C0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		2ECB626928267DEC002EC4C0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2ECB626A28267DEC002EC4C0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2ECB628328267DED002EC4C0 /* Debug */ = {
@@ -439,11 +428,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EHRQ6MYP7J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InvoiceLogger/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -466,11 +455,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = EHRQ6MYP7J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = InvoiceLogger/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

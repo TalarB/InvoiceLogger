@@ -268,5 +268,4 @@ final class CreateInvoiceView: UIView {
     @objc func deleteButtonTapped() {
         photoView.image = nil
     }
-    
 }

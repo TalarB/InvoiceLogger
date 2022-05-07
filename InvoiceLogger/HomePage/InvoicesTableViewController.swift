@@ -8,6 +8,7 @@
 import UIKit
 
 final class InvoicesTableViewController: UIViewController {
+    var coordinator: MainCoordinator?
     var dummyData: [InvoiceCell.ViewModel] = []
     let contentView = InvoicesTableView()
     let cellIdentifier = "InvoiceCell"
@@ -39,7 +40,7 @@ final class InvoicesTableViewController: UIViewController {
     }
 
     @objc func addNewInvoice() {
-        // open the sheet to input invoices
+        coordinator?.addNewInvoice()
     }
 }
 

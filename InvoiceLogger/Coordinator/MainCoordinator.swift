@@ -18,5 +18,17 @@ class MainCoordinator: Coordinator {
     func start() {
         let vc = InvoicesTableViewController()
         navigationController.pushViewController(vc, animated: false)
+        vc.coordinator = self
+    }
+
+    func addNewInvoice() {
+        let createInvoiceCoordinator = CreateInvoiceCoordinator(navigationController: navigationController)
+        childCoordinators.append(createInvoiceCoordinator)
+        createInvoiceCoordinator.parentCoordinator = self
+        createInvoiceCoordinator.start()
+    }
+
+    func createNewInvoiceCoordinatorDidClose() {
+        navigationController.popViewController(animated: true)
     }
 }

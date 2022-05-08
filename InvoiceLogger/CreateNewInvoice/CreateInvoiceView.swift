@@ -9,7 +9,7 @@ import UIKit
 
 protocol CreateInvoiceViewDelegate: AnyObject {
     func goBack()
-    func save(title: String, location: String, value: String, currency: String, image: UIImage?)
+    func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?)
     func addPhoto()
 }
 
@@ -257,7 +257,7 @@ final class CreateInvoiceView: UIView {
     }
 
     @objc func saveButtonTapped(sender: UIButton) {
-        delegate?.save(title: "", location: "", value: "", currency: "", image: nil)
+        delegate?.saveInvoice(title: "", location: "", value: "", currency: "", date: Date(), image: nil)
     }
 
     @objc func dismissKeyboard() {

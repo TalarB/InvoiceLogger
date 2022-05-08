@@ -10,6 +10,7 @@ import UIKit
 final class CreateInvoiceViewController: UIViewController, UINavigationControllerDelegate {
     weak var coordinator: CreateInvoiceCoordinator?
     let contentView = CreateInvoiceView()
+    let viewModel = CreateInvoiceViewModel()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,8 +37,8 @@ extension CreateInvoiceViewController: CreateInvoiceViewDelegate {
         coordinator?.addPhoto()
     }
     
-    func save(title: String, location: String, value: String, currency: String, image: UIImage?) {
-        
+    func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?) {
+        viewModel.saveInvoice(title: title, location: location, value: value, currency: currency, date: date, image: image)
     }
     
     func goBack() {
@@ -50,7 +51,6 @@ extension CreateInvoiceViewController: UIImagePickerControllerDelegate, UINaviga
         picker.dismiss(animated: true)
 
         guard let image = info[.editedImage] as? UIImage else {
-            print("No image found")
             return
         }
 

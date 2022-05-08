@@ -8,12 +8,12 @@
 import Foundation
 
 protocol InvoiceTableViewModelDelegate: AnyObject {
-    func invoiceTableViewModel(_ viewModel: InvoicesTableViewModel, didLoad invoices: [InvoiceModel])
+    func invoiceTableViewModel(_ viewModel: InvoicesTableViewModel, didLoad invoices: [Invoice])
     func invoicesTableViewModel(_ viewModel: InvoicesTableViewModel, didFailLoading message: String)
 }
 
 final class InvoicesTableViewModel {
-    var invoices = [InvoiceModel]()
+    var invoices = [Invoice]()
     weak var delegate: InvoiceTableViewModelDelegate?
     private let storageManager: StorageManager
 

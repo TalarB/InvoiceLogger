@@ -34,7 +34,7 @@ class MainCoordinator: Coordinator {
         navigationController.popViewController(animated: true)
     }
 
-    func showInvoiceDetails(for invoice: InvoiceModel) {
+    func showInvoiceDetails(for invoice: Invoice) {
         let vc = InvoiceDetailsViewController(invoice: invoice)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)

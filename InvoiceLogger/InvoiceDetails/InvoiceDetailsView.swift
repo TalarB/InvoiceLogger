@@ -187,19 +187,16 @@ final class InvoiceDetailsView: UIView {
         ])
     }
     
-    @objc func backButtonTapped(sender: UIButton) {
+    @objc private func backButtonTapped(sender: UIButton) {
         delegate?.goBack()
     }
 
-    func updateWith(invoice: InvoiceModel) {
+    func updateWith(invoice: Invoice) {
         titleTf.text = invoice.title
         locationTf.text = invoice.location
         valueTf.text = invoice.value
         currencyTf.text = invoice.currency
         dateLabel.text = dateFormatter.string(from: invoice.date)
-        if let imageData = invoice.image,
-           let image = UIImage(data: imageData) {
-            photoView.image = image
-        }
+        photoView.image = invoice.image
     }
 }

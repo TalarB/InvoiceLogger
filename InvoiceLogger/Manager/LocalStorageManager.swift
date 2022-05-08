@@ -10,7 +10,7 @@ import CoreData
 
 protocol StorageManager: AnyObject {
     func saveInvoice(_ invoice: Invoice)
-    func getSavedInvoices() throws -> [InvoiceModel]
+    func getSavedInvoices() throws -> [Invoice]
 }
 
 final class LocalStorageManager: StorageManager {
@@ -54,16 +54,23 @@ final class LocalStorageManager: StorageManager {
         }
     }
 
-    func getSavedInvoices() throws -> [InvoiceModel]  {
+    func getSavedInvoices() throws -> [Invoice]  {
         let context = container.viewContext
-        var invoices = [InvoiceModel]()
         let request = InvoiceModel.createFetchRequest()
+        var invoices = [Invoice]()
         request.returnsObjectsAsFaults = false
         let sort = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sort]
 
         do {
-            invoices = try context.fetch(request)
+            let invoiceModels = try context.fetch(request)
+            for invoice in invoiceModels {
+                var image: UIImage? = nil
+                if let imageData = invoice.image {
+                    image = UIImage(data: imageData)
+                }
+                invoices.append(Invoice(title: invoice.title, location: invoice.location, date: invoice.date, image: image, value: invoice.value, currency: invoice.currency))
+            }
             return invoices
         } catch {
             print("Fetch failed")

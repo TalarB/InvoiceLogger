@@ -61,7 +61,7 @@ final class InvoicesTableViewController: UIViewController {
 }
 
 extension InvoicesTableViewController: InvoiceTableViewModelDelegate {
-    func invoiceTableViewModel(_ viewModel: InvoicesTableViewModel, didLoad invoices: [InvoiceModel]) {
+    func invoiceTableViewModel(_ viewModel: InvoicesTableViewModel, didLoad invoices: [Invoice]) {
         contentView.errorLabel.isHidden = true
         contentView.loadingIndicator.stopAnimating()
         contentView.loadingIndicator.removeFromSuperview()
@@ -88,15 +88,7 @@ extension InvoicesTableViewController: UITableViewDataSource {
         }
         let invoice = viewModel.invoices[indexPath.row]
         
-        let invoiceImage: UIImage?
-        if let imageData = invoice.image,
-           let image = UIImage(data: imageData) {
-            invoiceImage = image
-        } else {
-            invoiceImage = nil
-        }
-        
-        let viewModel = InvoiceCell.ViewModel(title: invoice.title, location: invoice.location, date: invoice.date, value: invoice.value, currency: invoice.currency, image: invoiceImage)
+        let viewModel = InvoiceCell.ViewModel(title: invoice.title, location: invoice.location, date: invoice.date, value: invoice.value, currency: invoice.currency, image: invoice.image)
         cell.update(with: viewModel)
         return cell
     }

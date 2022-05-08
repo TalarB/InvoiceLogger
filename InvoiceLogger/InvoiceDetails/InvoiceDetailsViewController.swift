@@ -11,9 +11,9 @@ final class InvoiceDetailsViewController: UIViewController {
     weak var coordinator: MainCoordinator?
 
     private let contentView = InvoiceDetailsView()
-    private let invoice: InvoiceModel
+    private let invoice: Invoice
 
-    init(invoice: InvoiceModel) {
+    init(invoice: Invoice) {
         self.invoice = invoice
         super.init(nibName: nil, bundle: nil)
     }

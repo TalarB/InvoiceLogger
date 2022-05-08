@@ -42,7 +42,7 @@ class InvoiceCell: UITableViewCell {
         this.spacing = 15
         return this
     }()
-    private let locationLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.textAlignment = .center
@@ -92,7 +92,7 @@ class InvoiceCell: UITableViewCell {
     func update(with viewModel: InvoiceCell.ViewModel) {
         self.viewModel = viewModel
         letterLabel.text = viewModel.location.prefix(1).capitalized
-        locationLabel.text = viewModel.location
+        titleLabel.text = viewModel.title
         valueLabel.text = viewModel.value
         currencyLabel.text = viewModel.currency
         dateLabel.text = dateFormatter.string(from: viewModel.date)
@@ -103,7 +103,7 @@ class InvoiceCell: UITableViewCell {
         contentView.addSubview(roundedView)
         roundedView.addSubview(letterLabel)
         contentView.addSubview(locationAndTimeStackView)
-        locationAndTimeStackView.addArrangedSubview(locationLabel)
+        locationAndTimeStackView.addArrangedSubview(titleLabel)
         locationAndTimeStackView.addArrangedSubview(dateLabel)
         contentView.addSubview(valueLabel)
         contentView.addSubview(currencyLabel)
@@ -135,7 +135,7 @@ class InvoiceCell: UITableViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        locationLabel.text = nil
+        titleLabel.text = nil
         dateLabel.text = nil
         currencyLabel.text = nil
         valueLabel.text = nil

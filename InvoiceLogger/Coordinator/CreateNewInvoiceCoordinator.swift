@@ -27,7 +27,7 @@ final class CreateInvoiceCoordinator: Coordinator {
     }
 
     func close() {
-        parentCoordinator?.createNewInvoiceCoordinatorDidClose()
+        parentCoordinator?.createNewInvoiceCoordinatorDidFinish(child: self)
     }
 
     func addPhoto() {

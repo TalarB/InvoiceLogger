@@ -30,7 +30,13 @@ class MainCoordinator: Coordinator {
         createInvoiceCoordinator.start()
     }
 
-    func createNewInvoiceCoordinatorDidClose() {
+    func createNewInvoiceCoordinatorDidFinish(child: Coordinator?) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if coordinator === child {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
         navigationController.popViewController(animated: true)
     }
 

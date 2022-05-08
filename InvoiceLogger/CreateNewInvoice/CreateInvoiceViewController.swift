@@ -10,8 +10,17 @@ import UIKit
 final class CreateInvoiceViewController: UIViewController, UINavigationControllerDelegate {
     weak var coordinator: CreateInvoiceCoordinator?
     let contentView = CreateInvoiceView()
-    let viewModel = CreateInvoiceViewModel()
+    let viewModel: CreateInvoiceViewModel
 
+    init(storageManager: StorageManager) {
+        self.viewModel = CreateInvoiceViewModel(storageManager: storageManager)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)

@@ -15,7 +15,11 @@ protocol InvoiceTableViewModelDelegate: AnyObject {
 final class InvoicesTableViewModel {
     var invoices = [InvoiceModel]()
     weak var delegate: InvoiceTableViewModelDelegate?
-    private let storageManager = LocalStorageManager.shared
+    private let storageManager: StorageManager
+
+    init(storageManager: StorageManager) {
+        self.storageManager = storageManager
+    }
 
     func getInvoices() {
         do {

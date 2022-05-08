@@ -8,7 +8,12 @@
 import UIKit
 import CoreData
 
-final class LocalStorageManager {
+protocol StorageManager: AnyObject {
+    func saveInvoice(_ invoice: Invoice)
+    func getSavedInvoices() throws -> [InvoiceModel]
+}
+
+final class LocalStorageManager: StorageManager {
     static let shared = LocalStorageManager()
 
     private var container: NSPersistentContainer!
@@ -23,7 +28,7 @@ final class LocalStorageManager {
         }
     }
 
-    func saveContext() {
+    private func saveContext() {
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()

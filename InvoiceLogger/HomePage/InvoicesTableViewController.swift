@@ -11,8 +11,17 @@ final class InvoicesTableViewController: UIViewController {
     var coordinator: MainCoordinator?
     private let contentView = InvoicesTableView()
     private let cellIdentifier = "InvoiceCell"
-    private let viewModel = InvoicesTableViewModel()
+    private let viewModel: InvoicesTableViewModel
     private let refreshControl = UIRefreshControl()
+
+    init(storageManager: StorageManager) {
+        self.viewModel = InvoicesTableViewModel(storageManager: storageManager)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

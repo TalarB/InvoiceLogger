@@ -13,13 +13,15 @@ final class CreateInvoiceCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     weak var parentCoordinator: MainCoordinator?
+    private let storageManager: StorageManager
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, storageManager: StorageManager) {
         self.navigationController = navigationController
+        self.storageManager = storageManager
     }
 
     func start() {
-        let vc = CreateInvoiceViewController()
+        let vc = CreateInvoiceViewController(storageManager: storageManager)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }

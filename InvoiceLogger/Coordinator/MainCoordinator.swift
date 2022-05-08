@@ -10,19 +10,21 @@ import UIKit
 class MainCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    private let storageManager: StorageManager = LocalStorageManager.shared
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
 
     func start() {
-        let vc = InvoicesTableViewController()
+        let vc = InvoicesTableViewController(storageManager: storageManager)
         navigationController.pushViewController(vc, animated: false)
         vc.coordinator = self
     }
 
     func addNewInvoice() {
-        let createInvoiceCoordinator = CreateInvoiceCoordinator(navigationController: navigationController)
+        let createInvoiceCoordinator = CreateInvoiceCoordinator(navigationController: navigationController,
+                                                                storageManager: storageManager)
         childCoordinators.append(createInvoiceCoordinator)
         createInvoiceCoordinator.parentCoordinator = self
         createInvoiceCoordinator.start()

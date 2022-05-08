@@ -34,15 +34,18 @@ final class LocalStorageManager {
     }
 
     func saveInvoice(_ invoice: Invoice) {
-        let invoiceModel = InvoiceModel(context: container.viewContext)
-        invoiceModel.title = invoice.title
-        invoiceModel.location = invoice.location
-        invoiceModel.value = invoice.value
-        invoiceModel.currency = invoice.currency
-        invoiceModel.image = nil
-        invoiceModel.date = invoice.date
         DispatchQueue.main.async { [weak self] in
-            self?.saveContext()
+            guard let strongSelf = self else {
+                return
+            }
+            let invoiceModel = InvoiceModel(context: strongSelf.container.viewContext)
+            invoiceModel.title = invoice.title
+            invoiceModel.location = invoice.location
+            invoiceModel.value = invoice.value
+            invoiceModel.currency = invoice.currency
+            invoiceModel.image = invoice.image?.pngData()
+            invoiceModel.date = invoice.date
+            strongSelf.saveContext()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
             self.loadSavedInvoices()
@@ -50,14 +53,17 @@ final class LocalStorageManager {
     }
 
     func loadSavedInvoices() {
+        let context = container.viewContext
         var invoices = [InvoiceModel]()
         let request = InvoiceModel.createFetchRequest()
+        request.returnsObjectsAsFaults = false
         let sort = NSSortDescriptor(key: "date", ascending: false)
         request.sortDescriptors = [sort]
 
         do {
-            invoices = try container.viewContext.fetch(request)
+            invoices = try context.fetch(request)
             print("Got \(invoices.count) invoices")
+            print("Invoice title ", invoices[7].title)
             // let the home page viewModel know
         } catch {
             print("Fetch failed")

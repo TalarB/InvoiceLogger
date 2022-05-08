@@ -14,9 +14,9 @@ final class InvoicesTableViewController: UIViewController {
     let cellIdentifier = "InvoiceCell"
     
     override func viewDidLoad() {
-        dummyData = [InvoiceCell.ViewModel(location: "Allerod", timeAndDay: "11:15", value: "66,5", currency: "DKK", onSelect: { _ in self.didSelectInvoice() }),
-                     InvoiceCell.ViewModel(location: "Hillerod", timeAndDay: "14:22", value: "500", currency: "DKK", onSelect: { _ in self.didSelectInvoice() }),
-                     InvoiceCell.ViewModel(location: "Birkerod", timeAndDay: "21:30", value: "212", currency: "DKK", onSelect: { _ in self.didSelectInvoice() })]
+        dummyData = [InvoiceCell.ViewModel(title: "Random title", location: "Allerod", timeAndDay: "11:15", value: "66,5", currency: "DKK", image: nil),
+                     InvoiceCell.ViewModel(title: "This is a title", location: "Hillerod", timeAndDay: "14:22", value: "500", currency: "DKK", image: nil),
+                     InvoiceCell.ViewModel(title: "Title 3", location: "Birkerod", timeAndDay: "21:30", value: "212", currency: "DKK", image: nil)]
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewInvoice))
         navigationItem.rightBarButtonItem?.tintColor = .blue.withAlphaComponent(0.5)
@@ -26,6 +26,8 @@ final class InvoicesTableViewController: UIViewController {
 
         navigationItem.largeTitleDisplayMode = .never
         contentView.tableView.dataSource = self
+        contentView.tableView.delegate = self
+        contentView.tableView.allowsSelection = true
         contentView.tableView.register(InvoiceCell.self, forCellReuseIdentifier: cellIdentifier)
 //        contentView.tableView.sectionIndexColor = Asset.Colors.Regional.primary(theme: theme)
         contentView.tableView.reloadData()
@@ -60,6 +62,14 @@ extension InvoicesTableViewController: UITableViewDataSource {
         let viewModel = dummyData[indexPath.row]
         cell.update(with: viewModel)
         return cell
+    }
+}
+
+extension InvoicesTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedInvoice = dummyData[indexPath.row]
+        
+        coordinator?.showInvoiceDetails()
     }
 }
 

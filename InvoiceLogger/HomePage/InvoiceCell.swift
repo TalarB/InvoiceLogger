@@ -9,12 +9,12 @@ import UIKit
 
 class InvoiceCell: UITableViewCell {
     struct ViewModel {
-         // Might need more details here
+        let title: String
         let location: String
         let timeAndDay: String
         let value: String
         let currency: String
-        let onSelect: (InvoiceCell.ViewModel) -> Void
+        let image: UIImage?
     }
 
     private var viewModel: ViewModel?
@@ -94,9 +94,6 @@ class InvoiceCell: UITableViewCell {
     }
     
     private func setupView() {
-        let tapGestureRecognizer = UITapGestureRecognizer()
-        tapGestureRecognizer.addTarget(self, action: #selector(handleTap(_:)))
-        addGestureRecognizer(tapGestureRecognizer)
         contentView.backgroundColor = .blue.withAlphaComponent(0.3)
         contentView.addSubview(roundedView)
         roundedView.addSubview(letterLabel)
@@ -129,12 +126,6 @@ class InvoiceCell: UITableViewCell {
             valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15),
             valueLabel.trailingAnchor.constraint(equalTo: currencyLabel.leadingAnchor, constant: -7)
             ])
-    }
-
-    @objc private func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        if let viewModel = viewModel {
-            onSelectInvoice?(viewModel)
-        }
     }
 
     override func prepareForReuse() {

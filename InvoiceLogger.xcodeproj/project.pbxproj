@@ -23,6 +23,8 @@
 		2ECB62A12826FA7D002EC4C0 /* CreateNewInvoiceCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62A02826FA7D002EC4C0 /* CreateNewInvoiceCoordinator.swift */; };
 		2ECB62A428271E34002EC4C0 /* LocalStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62A328271E34002EC4C0 /* LocalStorageManager.swift */; };
 		2ECB62A628272111002EC4C0 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62A528272111002EC4C0 /* Invoice.swift */; };
+		2ECB62AA28272E58002EC4C0 /* InvoiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62A928272E58002EC4C0 /* InvoiceDetailsViewController.swift */; };
+		2ECB62AC28272E63002EC4C0 /* InvoiceDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB62AB28272E63002EC4C0 /* InvoiceDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		2ECB62A02826FA7D002EC4C0 /* CreateNewInvoiceCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewInvoiceCoordinator.swift; sourceTree = "<group>"; };
 		2ECB62A328271E34002EC4C0 /* LocalStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManager.swift; sourceTree = "<group>"; };
 		2ECB62A528272111002EC4C0 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		2ECB62A928272E58002EC4C0 /* InvoiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsViewController.swift; sourceTree = "<group>"; };
+		2ECB62AB28272E63002EC4C0 /* InvoiceDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +117,7 @@
 		2ECB625D28267DE9002EC4C0 /* InvoiceLogger */ = {
 			isa = PBXGroup;
 			children = (
+				2ECB62A828272E43002EC4C0 /* InvoiceDetails */,
 				2ECB62A728272116002EC4C0 /* Models */,
 				2ECB62A228271E0E002EC4C0 /* Manager */,
 				2ECB629B2826F648002EC4C0 /* CreateNewInvoice */,
@@ -186,6 +191,15 @@
 				2ECB62A528272111002EC4C0 /* Invoice.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2ECB62A828272E43002EC4C0 /* InvoiceDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2ECB62A928272E58002EC4C0 /* InvoiceDetailsViewController.swift */,
+				2ECB62AB28272E63002EC4C0 /* InvoiceDetailsView.swift */,
+			);
+			path = InvoiceDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,9 +332,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ECB62952826C79B002EC4C0 /* InvoicesTableViewController.swift in Sources */,
+				2ECB62AC28272E63002EC4C0 /* InvoiceDetailsView.swift in Sources */,
 				2ECB62A628272111002EC4C0 /* Invoice.swift in Sources */,
 				2ECB629F2826F6FF002EC4C0 /* CreateInvoiceView.swift in Sources */,
 				2ECB62982826C7FD002EC4C0 /* InvoiceCell.swift in Sources */,
+				2ECB62AA28272E58002EC4C0 /* InvoiceDetailsViewController.swift in Sources */,
 				2ECB629A2826C88A002EC4C0 /* InvoicesTableView.swift in Sources */,
 				2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */,
 				2ECB629D2826F6F4002EC4C0 /* CreateInvoiceViewController.swift in Sources */,

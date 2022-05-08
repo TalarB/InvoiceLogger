@@ -31,4 +31,14 @@ class MainCoordinator: Coordinator {
     func createNewInvoiceCoordinatorDidClose() {
         navigationController.popViewController(animated: true)
     }
+
+    func showInvoiceDetails() {
+        let vc = InvoiceDetailsViewController()
+        vc.coordinator = self
+        navigationController.pushViewController(vc, animated: true)
+    }
+
+    func goBack() {
+        navigationController.popViewController(animated: true)
+    }
 }

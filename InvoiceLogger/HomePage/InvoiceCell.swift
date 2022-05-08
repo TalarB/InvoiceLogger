@@ -11,7 +11,7 @@ class InvoiceCell: UITableViewCell {
     struct ViewModel {
         let title: String
         let location: String
-        let timeAndDay: String
+        let timeAndDay: Date
         let value: String
         let currency: String
         let image: UIImage?
@@ -88,7 +88,7 @@ class InvoiceCell: UITableViewCell {
         self.viewModel = viewModel
         letterLabel.text = viewModel.location.prefix(1).capitalized
         locationLabel.text = viewModel.location
-        dateLabel.text = viewModel.timeAndDay
+        dateLabel.text = "TODAY"
         valueLabel.text = viewModel.value
         currencyLabel.text = viewModel.currency
     }

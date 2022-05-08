@@ -10,6 +10,14 @@ import UIKit
 final class InvoicesTableView: UIView {
     let loadingIndicator = UIActivityIndicatorView()
 
+    let errorLabel: UILabel = {
+        let this = UILabel()
+        this.translatesAutoresizingMaskIntoConstraints = false
+        this.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        this.textColor = .blue.withAlphaComponent(0.5)
+        return this
+    }()
+
     let tableView: UITableView = {
         let this = UITableView()
         this.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +42,10 @@ final class InvoicesTableView: UIView {
 
     private func setupView() {
         tableView.separatorColor = .blue.withAlphaComponent(0.4)
+        loadingIndicator.tintColor = .blue.withAlphaComponent(0.4)
         addSubview(tableView)
+        addSubview(errorLabel)
+        addSubview(loadingIndicator)
     }
 
     private func setupLayout() {
@@ -42,7 +53,17 @@ final class InvoicesTableView: UIView {
             tableView.topAnchor.constraint(equalTo: topAnchor),
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+
+            loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            loadingIndicator.widthAnchor.constraint(equalToConstant: 60),
+            loadingIndicator.heightAnchor.constraint(equalTo: loadingIndicator.widthAnchor),
+
+            errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            errorLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            errorLabel.widthAnchor.constraint(equalToConstant: 100),
+            errorLabel.heightAnchor.constraint(equalToConstant: 100)
         ])
     }
 }

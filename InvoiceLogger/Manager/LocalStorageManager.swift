@@ -47,12 +47,9 @@ final class LocalStorageManager {
             invoiceModel.date = invoice.date
             strongSelf.saveContext()
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-            self.loadSavedInvoices()
-        }
     }
 
-    func loadSavedInvoices() {
+    func getSavedInvoices() throws -> [InvoiceModel]  {
         let context = container.viewContext
         var invoices = [InvoiceModel]()
         let request = InvoiceModel.createFetchRequest()
@@ -62,15 +59,10 @@ final class LocalStorageManager {
 
         do {
             invoices = try context.fetch(request)
-            print("Got \(invoices.count) invoices")
-            print("Invoice title ", invoices[7].title)
-            // let the home page viewModel know
+            return invoices
         } catch {
             print("Fetch failed")
         }
-    }
-
-    func getInvoices(completion: (() -> ()?)) -> [Invoice] {
-        return []
+        return[]
     }
 }

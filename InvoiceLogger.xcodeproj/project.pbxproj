@@ -11,6 +11,7 @@
 		2E2E9B4B2827E0100072DAB6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B492827E0100072DAB6 /* Model.xcdatamodeld */; };
 		2E2E9B4E2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B4C2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift */; };
 		2E2E9B4F2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B4D2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift */; };
+		2E2E9B5128282AD40072DAB6 /* InvoicesTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B5028282AD40072DAB6 /* InvoicesTableViewModel.swift */; };
 		2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */; };
 		2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */; };
 		2ECB626828267DEC002EC4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626728267DEC002EC4C0 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		2E2E9B4A2827E0100072DAB6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2E2E9B4C2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceModel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		2E2E9B4D2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceModel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2E2E9B5028282AD40072DAB6 /* InvoicesTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesTableViewModel.swift; sourceTree = "<group>"; };
 		2ECB625B28267DE9002EC4C0 /* InvoiceLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				2ECB62942826C79B002EC4C0 /* InvoicesTableViewController.swift */,
 				2ECB62992826C88A002EC4C0 /* InvoicesTableView.swift */,
 				2ECB62972826C7FD002EC4C0 /* InvoiceCell.swift */,
+				2E2E9B5028282AD40072DAB6 /* InvoicesTableViewModel.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				2E2E9B4B2827E0100072DAB6 /* Model.xcdatamodeld in Sources */,
 				2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */,
 				2ECB62A428271E34002EC4C0 /* LocalStorageManager.swift in Sources */,
+				2E2E9B5128282AD40072DAB6 /* InvoicesTableViewModel.swift in Sources */,
 				2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */,
 				2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */,
 			);

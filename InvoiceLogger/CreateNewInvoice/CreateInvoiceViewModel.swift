@@ -8,9 +8,10 @@
 import UIKit
 
 final class CreateInvoiceViewModel {
-    private let storageManage = LocalStorageManager.shared
+    private let storageManager = LocalStorageManager.shared
 
     func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?) {
-        
+        let invoice = Invoice(title: title, location: location, date: date, image: image, value: value, currency: currency)
+        storageManager.saveInvoice(invoice)
     }
 }

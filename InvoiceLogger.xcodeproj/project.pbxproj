@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2E2E9B452827C2DF0072DAB6 /* CreateInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B442827C2DF0072DAB6 /* CreateInvoiceViewModel.swift */; };
+		2E2E9B4B2827E0100072DAB6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B492827E0100072DAB6 /* Model.xcdatamodeld */; };
+		2E2E9B4E2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B4C2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift */; };
+		2E2E9B4F2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2E9B4D2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift */; };
 		2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */; };
 		2ECB626128267DE9002EC4C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */; };
 		2ECB626828267DEC002EC4C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECB626728267DEC002EC4C0 /* Assets.xcassets */; };
@@ -47,6 +50,9 @@
 
 /* Begin PBXFileReference section */
 		2E2E9B442827C2DF0072DAB6 /* CreateInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInvoiceViewModel.swift; sourceTree = "<group>"; };
+		2E2E9B4A2827E0100072DAB6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		2E2E9B4C2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceModel+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2E2E9B4D2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InvoiceModel+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		2ECB625B28267DE9002EC4C0 /* InvoiceLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InvoiceLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2ECB625E28267DE9002EC4C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2ECB626028267DE9002EC4C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +125,9 @@
 		2ECB625D28267DE9002EC4C0 /* InvoiceLogger */ = {
 			isa = PBXGroup;
 			children = (
+				2E2E9B4C2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift */,
+				2E2E9B4D2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift */,
+				2E2E9B492827E0100072DAB6 /* Model.xcdatamodeld */,
 				2ECB62A828272E43002EC4C0 /* InvoiceDetails */,
 				2ECB62A728272116002EC4C0 /* Models */,
 				2ECB62A228271E0E002EC4C0 /* Manager */,
@@ -338,13 +347,16 @@
 				2ECB62AC28272E63002EC4C0 /* InvoiceDetailsView.swift in Sources */,
 				2ECB62A628272111002EC4C0 /* Invoice.swift in Sources */,
 				2ECB629F2826F6FF002EC4C0 /* CreateInvoiceView.swift in Sources */,
+				2E2E9B4E2827E7940072DAB6 /* InvoiceModel+CoreDataClass.swift in Sources */,
 				2ECB62982826C7FD002EC4C0 /* InvoiceCell.swift in Sources */,
 				2E2E9B452827C2DF0072DAB6 /* CreateInvoiceViewModel.swift in Sources */,
+				2E2E9B4F2827E7940072DAB6 /* InvoiceModel+CoreDataProperties.swift in Sources */,
 				2ECB62AA28272E58002EC4C0 /* InvoiceDetailsViewController.swift in Sources */,
 				2ECB629A2826C88A002EC4C0 /* InvoicesTableView.swift in Sources */,
 				2ECB628F28267E1B002EC4C0 /* Coordinator.swift in Sources */,
 				2ECB629D2826F6F4002EC4C0 /* CreateInvoiceViewController.swift in Sources */,
 				2ECB62A12826FA7D002EC4C0 /* CreateNewInvoiceCoordinator.swift in Sources */,
+				2E2E9B4B2827E0100072DAB6 /* Model.xcdatamodeld in Sources */,
 				2ECB625F28267DE9002EC4C0 /* AppDelegate.swift in Sources */,
 				2ECB62A428271E34002EC4C0 /* LocalStorageManager.swift in Sources */,
 				2ECB629128267E39002EC4C0 /* MainCoordinator.swift in Sources */,
@@ -667,6 +679,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2E2E9B492827E0100072DAB6 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2E2E9B4A2827E0100072DAB6 /* Model.xcdatamodel */,
+			);
+			currentVersion = 2E2E9B4A2827E0100072DAB6 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = ../Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2ECB625328267DE9002EC4C0 /* Project object */;
 }

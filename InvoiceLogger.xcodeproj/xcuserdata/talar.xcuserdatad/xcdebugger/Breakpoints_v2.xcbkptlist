@@ -30,8 +30,8 @@
             filePath = "InvoiceLogger/CreateNewInvoice/CreateInvoiceView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "addPhotoButtonTapped(sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -55,32 +55,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A63FA9FA-C5E7-4578-BFB3-59E21A67B672"
+            uuid = "DD8A5CE0-E30D-4A5B-9EAE-A261AE18C8E0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InvoiceLogger/CreateNewInvoice/CreateInvoiceViewController.swift"
+            filePath = "InvoiceLogger/Manager/LocalStorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "goBack()"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "loadSavedInvoices()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "90BDB742-85B5-4D0C-9563-EA30B1C151B9"
+            uuid = "2234E357-0730-4B91-8B08-C623F2237A20"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "InvoiceLogger/CreateNewInvoice/CreateInvoiceView.swift"
+            filePath = "InvoiceLogger/Manager/LocalStorageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
-            landmarkName = "backButtonTapped(sender:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "loadSavedInvoices()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A8A3157-182F-4FBE-AD6E-507F89407C5D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InvoiceLogger/Manager/LocalStorageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "saveInvoice(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "508A9359-1D35-422D-BF65-6410F2BE91AE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InvoiceLogger/CreateNewInvoice/CreateInvoiceViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "saveInvoice(title:location:value:currency:date:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

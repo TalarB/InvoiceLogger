@@ -9,7 +9,7 @@ import UIKit
 
 protocol CreateInvoiceViewDelegate: AnyObject {
     func goBack()
-    func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?)
+    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?)
     func addPhoto()
 }
 
@@ -85,6 +85,7 @@ final class CreateInvoiceView: UIView {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.isUserInteractionEnabled = true
+        this.autocapitalizationType = .allCharacters
         this.placeholder = "DKK"
         return this
     }()
@@ -242,25 +243,45 @@ final class CreateInvoiceView: UIView {
         ])
     }
 
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
+    @objc private func datePickerValueChanged(sender: UIDatePicker) {
         // TODO: Check if we will need this
         let dateFormatter: DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
     }
 
-    @objc func addPhotoButtonTapped(sender: UIButton) {
+    @objc private func addPhotoButtonTapped(sender: UIButton) {
         delegate?.addPhoto()
     }
 
-    @objc func backButtonTapped(sender: UIButton) {
+    @objc private func backButtonTapped(sender: UIButton) {
         delegate?.goBack()
     }
 
-    @objc func saveButtonTapped(sender: UIButton) {
-        delegate?.saveInvoice(title: "", location: "", value: "", currency: "", date: Date(), image: nil)
+    @objc private func saveButtonTapped(sender: UIButton) {
+        if let title = titleTf.text,
+           let location = locationTf.text,
+           let total = totalTf.text,
+           let currency = currencyTf.text {
+            delegate?.saveInvoice(title: title, location: location, value: total, currency: currency, date: datePicker.date, image: photoView.image)
+        } else {
+            let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                alertController.dismiss(animated: true, completion: nil)})
+            alertController.addAction(okAction)
+            if titleTf.text == nil {
+                alertController.message = "An invoice cannot be saved without a title."
+            } else if locationTf.text == nil {
+                alertController.message = "An invoice cannot be saved without a location."
+            } else if totalTf.text == nil {
+                alertController.message = "An invoice cannot be saved without specifying a value."
+            } else if currencyTf.text == nil {
+                alertController.message = "An invoice cannot be saved without specifying a currency."
+            }
+            
+        }
     }
 
-    @objc func dismissKeyboard() {
+    @objc private func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         endEditing(true)
     }

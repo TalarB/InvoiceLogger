@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class Invoice {
-    let title: String
+    var title: String
     let location: String
     let date: Date
     let image: UIImage?

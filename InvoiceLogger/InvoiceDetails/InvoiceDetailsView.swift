@@ -56,17 +56,18 @@ final class InvoiceDetailsView: UIView {
     private let locationTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
+        this.isUserInteractionEnabled = false
         this.placeholder = "Banevang 5, Hillerød"
         this.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return this
     }()
-    private let totalLabel: UILabel = {
+    private let valueLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.text = "Total"
+        this.text = "Value"
         return this
     }()
-    private let totalTf: UITextField = {
+    private let valueTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.placeholder = "100"
@@ -117,8 +118,8 @@ final class InvoiceDetailsView: UIView {
         scrollView.addSubview(fieldsView)
         fieldsView.addSubview(titleTf)
         fieldsView.addSubview(locationTf)
-        fieldsView.addSubview(totalLabel)
-        fieldsView.addSubview(totalTf)
+        fieldsView.addSubview(valueLabel)
+        fieldsView.addSubview(valueTf)
         fieldsView.addSubview(currencyTf)
         fieldsView.addSubview(dateLabel)
         scrollView.addSubview(photoView)
@@ -158,22 +159,22 @@ final class InvoiceDetailsView: UIView {
             locationTf.heightAnchor.constraint(equalToConstant: 35),
             locationTf.trailingAnchor.constraint(equalTo: fieldsView.trailingAnchor),
             
-            totalLabel.topAnchor.constraint(equalTo: locationTf.bottomAnchor, constant: 25),
-            totalLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
-            totalLabel.heightAnchor.constraint(equalToConstant: 30),
+            valueLabel.topAnchor.constraint(equalTo: locationTf.bottomAnchor, constant: 25),
+            valueLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
+            valueLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            totalTf.topAnchor.constraint(equalTo: totalLabel.topAnchor),
-            totalTf.trailingAnchor.constraint(equalTo: currencyTf.leadingAnchor, constant: -5),
-            totalTf.heightAnchor.constraint(equalToConstant: 30),
-            totalTf.widthAnchor.constraint(equalToConstant: 30),
+            valueTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
+            valueTf.trailingAnchor.constraint(equalTo: currencyTf.leadingAnchor, constant: -5),
+            valueTf.heightAnchor.constraint(equalToConstant: 30),
+            valueTf.widthAnchor.constraint(equalToConstant: 30),
             
-            currencyTf.topAnchor.constraint(equalTo: totalLabel.topAnchor),
+            currencyTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
             currencyTf.trailingAnchor.constraint(lessThanOrEqualTo: dateLabel.trailingAnchor),
             currencyTf.widthAnchor.constraint(equalToConstant: 40),
             currencyTf.heightAnchor.constraint(equalToConstant: 30),
             
             dateLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: totalLabel.bottomAnchor, constant: 15),
+            dateLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 15),
             dateLabel.bottomAnchor.constraint(equalTo: fieldsView.bottomAnchor, constant: -10),
             dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: fieldsView.trailingAnchor),
             dateLabel.widthAnchor.constraint(equalToConstant: 188),

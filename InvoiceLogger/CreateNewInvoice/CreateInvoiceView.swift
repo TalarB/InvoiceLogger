@@ -61,13 +61,13 @@ final class CreateInvoiceView: UIView {
         this.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return this
     }()
-    private let totalLabel: UILabel = {
+    private let valueLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.text = "Total"
+        this.text = "Value"
         return this
     }()
-    private let totalTf: UITextField = {
+    private let valueTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.placeholder = "100"
@@ -92,7 +92,8 @@ final class CreateInvoiceView: UIView {
     private let datePicker: UIDatePicker = {
         let this = UIDatePicker()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.backgroundColor = .lightGray
+        this.backgroundColor = .blue.withAlphaComponent(0.5)
+        this.tintColor = .white
         return this
     }()
     private let addPhotoButton: UIButton = {
@@ -153,8 +154,8 @@ final class CreateInvoiceView: UIView {
         scrollView.addSubview(fieldsView)
         fieldsView.addSubview(titleTf)
         fieldsView.addSubview(locationTf)
-        fieldsView.addSubview(totalLabel)
-        fieldsView.addSubview(totalTf)
+        fieldsView.addSubview(valueLabel)
+        fieldsView.addSubview(valueTf)
         fieldsView.addSubview(currencyLabel)
         fieldsView.addSubview(currencyTf)
         fieldsView.addSubview(datePicker)
@@ -199,23 +200,25 @@ final class CreateInvoiceView: UIView {
             locationTf.heightAnchor.constraint(equalToConstant: 35),
             locationTf.trailingAnchor.constraint(equalTo: fieldsView.trailingAnchor),
 
-            totalLabel.topAnchor.constraint(equalTo: locationTf.bottomAnchor, constant: 25),
-            totalLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
-            totalLabel.heightAnchor.constraint(equalToConstant: 30),
+            valueLabel.topAnchor.constraint(equalTo: locationTf.bottomAnchor, constant: 25),
+            valueLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
+            valueLabel.heightAnchor.constraint(equalToConstant: 30),
 
-            totalTf.topAnchor.constraint(equalTo: totalLabel.topAnchor),
-            totalTf.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
-            totalTf.heightAnchor.constraint(equalToConstant: 30),
-            totalTf.widthAnchor.constraint(equalToConstant: 30),
+            valueTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
+            valueTf.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
+            valueTf.heightAnchor.constraint(equalToConstant: 30),
+            valueTf.widthAnchor.constraint(greaterThanOrEqualToConstant: 45),
+            valueTf.leadingAnchor.constraint(greaterThanOrEqualTo: valueLabel.leadingAnchor, constant: 3),
 
-            currencyLabel.topAnchor.constraint(equalTo: totalLabel.bottomAnchor, constant: 15),
+            currencyLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 15),
             currencyLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
             currencyLabel.heightAnchor.constraint(equalToConstant: 30),
 
             currencyTf.topAnchor.constraint(equalTo: currencyLabel.topAnchor),
             currencyTf.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
-            currencyTf.widthAnchor.constraint(equalToConstant: 40),
+            currencyTf.widthAnchor.constraint(greaterThanOrEqualToConstant: 45),
             currencyTf.heightAnchor.constraint(equalToConstant: 30),
+            currencyTf.leadingAnchor.constraint(greaterThanOrEqualTo: currencyLabel.leadingAnchor, constant: 3),
 
             datePicker.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
             datePicker.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 15),
@@ -260,9 +263,9 @@ final class CreateInvoiceView: UIView {
     @objc private func saveButtonTapped(sender: UIButton) {
         if let title = titleTf.text,
            let location = locationTf.text,
-           let total = totalTf.text,
+           let value = valueTf.text,
            let currency = currencyTf.text {
-            delegate?.saveInvoice(title: title, location: location, value: total, currency: currency, date: datePicker.date, image: photoView.image)
+            delegate?.saveInvoice(title: title, location: location, value: value, currency: currency, date: datePicker.date, image: photoView.image)
         } else {
             let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -272,7 +275,7 @@ final class CreateInvoiceView: UIView {
                 alertController.message = "An invoice cannot be saved without a title."
             } else if locationTf.text == nil {
                 alertController.message = "An invoice cannot be saved without a location."
-            } else if totalTf.text == nil {
+            } else if valueTf.text == nil {
                 alertController.message = "An invoice cannot be saved without specifying a value."
             } else if currencyTf.text == nil {
                 alertController.message = "An invoice cannot be saved without specifying a currency."

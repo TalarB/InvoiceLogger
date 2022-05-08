@@ -17,7 +17,6 @@ class InvoiceCell: UITableViewCell {
         let image: UIImage?
     }
 
-    private var viewModel: ViewModel?
     private let roundedView: UIView = {
         let this = UIView()
         this.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +89,6 @@ class InvoiceCell: UITableViewCell {
     }
 
     func update(with viewModel: InvoiceCell.ViewModel) {
-        self.viewModel = viewModel
         letterLabel.text = viewModel.location.prefix(1).capitalized
         titleLabel.text = viewModel.title
         valueLabel.text = viewModel.value

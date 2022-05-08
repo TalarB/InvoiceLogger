@@ -70,6 +70,7 @@ final class InvoiceDetailsView: UIView {
         this.translatesAutoresizingMaskIntoConstraints = false
         this.isUserInteractionEnabled = false
         this.keyboardType = .numberPad
+        this.textAlignment = .right
         return this
     }()
     private let currencyTf: UITextField = {
@@ -197,6 +198,8 @@ final class InvoiceDetailsView: UIView {
         valueTf.text = invoice.value
         currencyTf.text = invoice.currency
         dateLabel.text = dateFormatter.string(from: invoice.date)
-        photoView.image = invoice.image
+        DispatchQueue.main.async { [weak self] in
+            self?.photoView.image = invoice.image
+        }
     }
 }

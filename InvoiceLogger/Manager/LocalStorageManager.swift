@@ -72,9 +72,6 @@ final class LocalStorageManager: StorageManager {
                 invoices.append(Invoice(title: invoice.title, location: invoice.location, date: invoice.date, image: image, value: invoice.value, currency: invoice.currency))
             }
             return invoices
-        } catch {
-            print("Fetch failed")
         }
-        return[]
     }
 }

@@ -15,6 +15,8 @@ protocol CreateInvoiceViewDelegate: AnyObject {
 
 final class CreateInvoiceView: UIView {
     weak var delegate: CreateInvoiceViewDelegate?
+    var currencyPickerOptions: [String] = []
+    private var selectedCurrency: String = "DKK" // Initial value
 
     private let topBackgroundView: UIView = {
         let this = UIView()
@@ -71,22 +73,13 @@ final class CreateInvoiceView: UIView {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.placeholder = "100"
-        this.keyboardType = .numberPad
+        this.keyboardType = .decimalPad
         this.isUserInteractionEnabled = true
         return this
     }()
-    private let currencyLabel: UILabel = {
-        let this = UILabel()
+    private let currencyPicker: UIPickerView = {
+        let this = UIPickerView()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.text = "Currency"
-        return this
-    }()
-    private let currencyTf: UITextField = {
-        let this = UITextField()
-        this.translatesAutoresizingMaskIntoConstraints = false
-        this.isUserInteractionEnabled = true
-        this.autocapitalizationType = .allCharacters
-        this.placeholder = "DKK"
         return this
     }()
     private let datePicker: UIDatePicker = {
@@ -108,7 +101,6 @@ final class CreateInvoiceView: UIView {
         this.translatesAutoresizingMaskIntoConstraints = false
         this.setImage(UIImage(named: "delete"), for: .normal)
         this.tintColor = .blue.withAlphaComponent(0.3)
-        this.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         return this
     }()
     let photoView: UIImageView = {
@@ -125,17 +117,13 @@ final class CreateInvoiceView: UIView {
         this.setTitle("Save", for: .normal)
         return this
     }()
-    private let activityIndicator: UIActivityIndicatorView = {
-        let this = UIActivityIndicatorView()
-        this.translatesAutoresizingMaskIntoConstraints = false
-        this.backgroundColor = .blue.withAlphaComponent(0.5)
-        return this
-    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupLayout()
+        currencyPicker.delegate = self
+        currencyPicker.dataSource = self
     }
 
     required init?(coder: NSCoder) {
@@ -153,7 +141,6 @@ final class CreateInvoiceView: UIView {
         addGestureRecognizer(tap)
 
         addSubview(topBackgroundView)
-        addSubview(activityIndicator)
         topBackgroundView.addSubview(newInvoiceLabel)
         topBackgroundView.addSubview(backButton)
         addSubview(scrollView)
@@ -162,8 +149,7 @@ final class CreateInvoiceView: UIView {
         fieldsView.addSubview(locationTf)
         fieldsView.addSubview(valueLabel)
         fieldsView.addSubview(valueTf)
-        fieldsView.addSubview(currencyLabel)
-        fieldsView.addSubview(currencyTf)
+        fieldsView.addSubview(currencyPicker)
         fieldsView.addSubview(datePicker)
         scrollView.addSubview(addPhotoButton)
         scrollView.addSubview(deletePhotoButton)
@@ -211,26 +197,22 @@ final class CreateInvoiceView: UIView {
             valueLabel.heightAnchor.constraint(equalToConstant: 30),
 
             valueTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
-            valueTf.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
+            valueTf.trailingAnchor.constraint(equalTo: currencyPicker.leadingAnchor, constant: -3),
             valueTf.heightAnchor.constraint(equalToConstant: 30),
             valueTf.widthAnchor.constraint(greaterThanOrEqualToConstant: 45),
             valueTf.leadingAnchor.constraint(greaterThanOrEqualTo: valueLabel.leadingAnchor, constant: 3),
-
-            currencyLabel.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 15),
-            currencyLabel.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
-            currencyLabel.heightAnchor.constraint(equalToConstant: 30),
-
-            currencyTf.topAnchor.constraint(equalTo: currencyLabel.topAnchor),
-            currencyTf.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
-            currencyTf.widthAnchor.constraint(greaterThanOrEqualToConstant: 45),
-            currencyTf.heightAnchor.constraint(equalToConstant: 30),
-            currencyTf.leadingAnchor.constraint(greaterThanOrEqualTo: currencyLabel.leadingAnchor, constant: 3),
+    
+            currencyPicker.leadingAnchor.constraint(equalTo: valueTf.trailingAnchor),
+            currencyPicker.centerYAnchor.constraint(equalTo: valueTf.centerYAnchor),
+            currencyPicker.trailingAnchor.constraint(equalTo: datePicker.trailingAnchor),
+            currencyPicker.widthAnchor.constraint(equalToConstant: 60),
+            currencyPicker.heightAnchor.constraint(equalToConstant: 60),
 
             datePicker.leadingAnchor.constraint(equalTo: fieldsView.leadingAnchor),
-            datePicker.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 15),
+            datePicker.topAnchor.constraint(equalTo: valueLabel.bottomAnchor, constant: 15),
             datePicker.bottomAnchor.constraint(equalTo: fieldsView.bottomAnchor, constant: -10),
             datePicker.trailingAnchor.constraint(lessThanOrEqualTo: fieldsView.trailingAnchor),
-            datePicker.widthAnchor.constraint(equalToConstant: 200),
+            datePicker.widthAnchor.constraint(equalToConstant: 220),
 
             addPhotoButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             addPhotoButton.heightAnchor.constraint(equalToConstant: 35),
@@ -248,12 +230,7 @@ final class CreateInvoiceView: UIView {
             saveButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             saveButton.widthAnchor.constraint(equalToConstant: 200),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20),
-
-            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-            activityIndicator.widthAnchor.constraint(equalToConstant: 60),
-            activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)
+            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20)
         ])
     }
 
@@ -273,12 +250,8 @@ final class CreateInvoiceView: UIView {
     @objc private func saveButtonTapped(sender: UIButton) {
         if let title = titleTf.text,
            let location = locationTf.text,
-           let value = valueTf.text,
-           let currency = currencyTf.text {
-            activityIndicator.startAnimating()
-            delegate?.saveInvoice(title: title, location: location, value: value, currency: currency, date: datePicker.date, image: photoView.image) { [weak self] in
-                self?.activityIndicator.stopAnimating()
-                self?.activityIndicator.removeFromSuperview()
+           let value = valueTf.text {
+            delegate?.saveInvoice(title: title, location: location, value: value, currency: selectedCurrency, date: datePicker.date, image: photoView.image) { [weak self] in
                 self?.delegate?.goBack()
             }
         } else {
@@ -292,8 +265,6 @@ final class CreateInvoiceView: UIView {
                 alertController.message = "An invoice cannot be saved without a location."
             } else if valueTf.text == nil {
                 alertController.message = "An invoice cannot be saved without specifying a value."
-            } else if currencyTf.text == nil {
-                alertController.message = "An invoice cannot be saved without specifying a currency."
             }
         }
     }
@@ -304,5 +275,33 @@ final class CreateInvoiceView: UIView {
 
     @objc func deleteButtonTapped() {
         photoView.image = nil
+    }
+}
+
+extension CreateInvoiceView: UIPickerViewDelegate, UIPickerViewDataSource {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+       let row = currencyPickerOptions[row]
+       return row
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedCurrency = currencyPickerOptions[row]
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        currencyPickerOptions.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var label = UILabel()
+        if let v = view as? UILabel { label = v }
+        label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        label.text =  currencyPickerOptions[row]
+        label.textAlignment = .center
+        return label
     }
 }

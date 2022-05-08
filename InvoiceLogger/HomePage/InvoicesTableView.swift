@@ -8,8 +8,11 @@
 import UIKit
 
 final class InvoicesTableView: UIView {
-    let loadingIndicator = UIActivityIndicatorView()
-
+    let loadingIndicator: UIActivityIndicatorView = {
+        let this = UIActivityIndicatorView()
+        this.tintColor = .blue.withAlphaComponent(0.5)
+        return this
+    }()
     let errorLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
@@ -17,7 +20,6 @@ final class InvoicesTableView: UIView {
         this.textColor = .blue.withAlphaComponent(0.5)
         return this
     }()
-
     let tableView: UITableView = {
         let this = UITableView()
         this.translatesAutoresizingMaskIntoConstraints = false

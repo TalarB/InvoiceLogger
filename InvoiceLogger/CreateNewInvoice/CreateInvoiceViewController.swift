@@ -9,8 +9,8 @@ import UIKit
 
 final class CreateInvoiceViewController: UIViewController, UINavigationControllerDelegate {
     weak var coordinator: CreateInvoiceCoordinator?
-    let contentView = CreateInvoiceView()
-    let viewModel: CreateInvoiceViewModel
+    private let contentView = CreateInvoiceView()
+    private let viewModel: CreateInvoiceViewModel
 
     init(storageManager: StorageManager) {
         self.viewModel = CreateInvoiceViewModel(storageManager: storageManager)
@@ -25,8 +25,10 @@ final class CreateInvoiceViewController: UIViewController, UINavigationControlle
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.currencyPickerOptions = viewModel.currencyPickerOptions
     }
 
     override func loadView() {

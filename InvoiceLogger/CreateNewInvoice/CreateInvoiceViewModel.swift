@@ -9,6 +9,7 @@ import UIKit
 
 final class CreateInvoiceViewModel {
     private let storageManager: StorageManager
+    let currencyPickerOptions: [String] = ["DKK", "EURO", "USD", "GBP", "LBP", "SEK"]
 
     init(storageManager: StorageManager) {
         self.storageManager = storageManager

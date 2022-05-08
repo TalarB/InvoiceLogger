@@ -9,7 +9,7 @@ import UIKit
 
 protocol CreateInvoiceViewDelegate: AnyObject {
     func goBack()
-    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?)
+    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: (() -> ())?)
     func addPhoto()
 }
 
@@ -125,6 +125,12 @@ final class CreateInvoiceView: UIView {
         this.setTitle("Save", for: .normal)
         return this
     }()
+    private let activityIndicator: UIActivityIndicatorView = {
+        let this = UIActivityIndicatorView()
+        this.translatesAutoresizingMaskIntoConstraints = false
+        this.backgroundColor = .blue.withAlphaComponent(0.5)
+        return this
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -146,8 +152,8 @@ final class CreateInvoiceView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         addGestureRecognizer(tap)
 
-
         addSubview(topBackgroundView)
+        addSubview(activityIndicator)
         topBackgroundView.addSubview(newInvoiceLabel)
         topBackgroundView.addSubview(backButton)
         addSubview(scrollView)
@@ -224,13 +230,13 @@ final class CreateInvoiceView: UIView {
             datePicker.topAnchor.constraint(equalTo: currencyLabel.bottomAnchor, constant: 15),
             datePicker.bottomAnchor.constraint(equalTo: fieldsView.bottomAnchor, constant: -10),
             datePicker.trailingAnchor.constraint(lessThanOrEqualTo: fieldsView.trailingAnchor),
-            datePicker.widthAnchor.constraint(equalToConstant: 188),
+            datePicker.widthAnchor.constraint(equalToConstant: 200),
 
             addPhotoButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             addPhotoButton.heightAnchor.constraint(equalToConstant: 35),
             photoView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 8),
             photoView.heightAnchor.constraint(equalToConstant: 300),
-            photoView.widthAnchor.constraint(equalToConstant: 188),
+            photoView.widthAnchor.constraint(equalToConstant: 200),
             photoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             deletePhotoButton.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20),
             deletePhotoButton.centerYAnchor.constraint(equalTo: photoView.centerYAnchor),
@@ -240,16 +246,20 @@ final class CreateInvoiceView: UIView {
 
             saveButton.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 35),
             saveButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            saveButton.widthAnchor.constraint(equalToConstant: 188),
+            saveButton.widthAnchor.constraint(equalToConstant: 200),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20)
+            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20),
+
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 60),
+            activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)
         ])
     }
 
     @objc private func datePickerValueChanged(sender: UIDatePicker) {
-        // TODO: Check if we will need this
         let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
+        dateFormatter.dateFormat = "MMM d YYYY, h:mm a"
     }
 
     @objc private func addPhotoButtonTapped(sender: UIButton) {
@@ -265,7 +275,12 @@ final class CreateInvoiceView: UIView {
            let location = locationTf.text,
            let value = valueTf.text,
            let currency = currencyTf.text {
-            delegate?.saveInvoice(title: title, location: location, value: value, currency: currency, date: datePicker.date, image: photoView.image)
+            activityIndicator.startAnimating()
+            delegate?.saveInvoice(title: title, location: location, value: value, currency: currency, date: datePicker.date, image: photoView.image) { [weak self] in
+                self?.activityIndicator.stopAnimating()
+                self?.activityIndicator.removeFromSuperview()
+                self?.delegate?.goBack()
+            }
         } else {
             let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -280,12 +295,10 @@ final class CreateInvoiceView: UIView {
             } else if currencyTf.text == nil {
                 alertController.message = "An invoice cannot be saved without specifying a currency."
             }
-            
         }
     }
 
     @objc private func dismissKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         endEditing(true)
     }
 

@@ -37,14 +37,14 @@ extension CreateInvoiceViewController: CreateInvoiceViewDelegate {
         coordinator?.addPhoto()
     }
     
-    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?) {
+    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: (() -> ())?) {
         if let title = title, title != "",
            let location = location, location != "",
            let value = value, value != "",
            let currency = currency, currency != "",
            let date = date {
             viewModel.saveInvoice(title: title, location: location, value: value, currency: currency, date: date, image: image)
-            coordinator?.close()
+            completion?()
         } else {
             let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in

@@ -12,6 +12,7 @@ final class InvoicesTableViewController: UIViewController {
     private let contentView = InvoicesTableView()
     private let cellIdentifier = "InvoiceCell"
     private let viewModel = InvoicesTableViewModel()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +21,10 @@ final class InvoicesTableViewController: UIViewController {
         title = "Invoices"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.blue.withAlphaComponent(0.5)]
 
-
         navigationItem.largeTitleDisplayMode = .never
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = .blue.withAlphaComponent(0.5)
+        contentView.tableView.addSubview(refreshControl)
         contentView.tableView.dataSource = self
         contentView.tableView.delegate = self
         contentView.tableView.allowsSelection = true
@@ -30,17 +33,21 @@ final class InvoicesTableViewController: UIViewController {
         viewModel.delegate = self
         viewModel.getInvoices()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.getInvoices()
+    }
     
     override func loadView() {
         view = contentView
     }
 
-    func didSelectInvoice() {
-        // open invoice details sheet
+    @objc private func addNewInvoice() {
+        coordinator?.addNewInvoice()
     }
 
-    @objc func addNewInvoice() {
-        coordinator?.addNewInvoice()
+    @objc private func refresh(_ sender: AnyObject) {
+        viewModel.getInvoices()
     }
 }
 
@@ -49,6 +56,7 @@ extension InvoicesTableViewController: InvoiceTableViewModelDelegate {
         contentView.errorLabel.isHidden = true
         contentView.loadingIndicator.stopAnimating()
         contentView.loadingIndicator.removeFromSuperview()
+        refreshControl.endRefreshing()
         contentView.tableView.reloadData()
     }
     
@@ -79,15 +87,16 @@ extension InvoicesTableViewController: UITableViewDataSource {
             invoiceImage = nil
         }
         
-        let viewModel = InvoiceCell.ViewModel(title: invoice.title, location: invoice.location, timeAndDay: invoice.date, value: invoice.value, currency: invoice.currency, image: invoiceImage)
+        let viewModel = InvoiceCell.ViewModel(title: invoice.title, location: invoice.location, date: invoice.date, value: invoice.value, currency: invoice.currency, image: invoiceImage)
         cell.update(with: viewModel)
         return cell
     }
 }
 
 extension InvoicesTableViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
-        coordinator?.showInvoiceDetails()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let invoice = viewModel.invoices[indexPath.row]
+        coordinator?.showInvoiceDetails(for: invoice)
     }
 }
 

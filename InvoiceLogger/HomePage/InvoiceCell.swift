@@ -11,7 +11,7 @@ class InvoiceCell: UITableViewCell {
     struct ViewModel {
         let title: String
         let location: String
-        let timeAndDay: Date
+        let date: Date
         let value: String
         let currency: String
         let image: UIImage?
@@ -70,6 +70,11 @@ class InvoiceCell: UITableViewCell {
         this.font = UIFont.systemFont(ofSize: 15)
         return this
     }()
+    private let dateFormatter: DateFormatter = {
+        let this = DateFormatter()
+        this.dateFormat = "MMM d YYYY, h:mm a"
+        return this
+    }()
 
     private let tapGestureRecognizer = UITapGestureRecognizer()
     private var onSelectInvoice: ((InvoiceCell.ViewModel) -> Void)?
@@ -88,9 +93,9 @@ class InvoiceCell: UITableViewCell {
         self.viewModel = viewModel
         letterLabel.text = viewModel.location.prefix(1).capitalized
         locationLabel.text = viewModel.location
-        dateLabel.text = "TODAY"
         valueLabel.text = viewModel.value
         currencyLabel.text = viewModel.currency
+        dateLabel.text = dateFormatter.string(from: viewModel.date)
     }
     
     private func setupView() {

@@ -48,7 +48,6 @@ final class InvoiceDetailsView: UIView {
     private let titleTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.text = "This is an invoice title"
         this.isUserInteractionEnabled = false
         this.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         return this
@@ -57,7 +56,6 @@ final class InvoiceDetailsView: UIView {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.isUserInteractionEnabled = false
-        this.placeholder = "Banevang 5, Hillerød"
         this.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return this
     }()
@@ -70,30 +68,31 @@ final class InvoiceDetailsView: UIView {
     private let valueTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.placeholder = "100"
+        this.isUserInteractionEnabled = false
         this.keyboardType = .numberPad
-        this.isUserInteractionEnabled = true
         return this
     }()
     private let currencyTf: UITextField = {
         let this = UITextField()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.isUserInteractionEnabled = false
-        this.text = "DKK"
         this.font = UIFont.systemFont(ofSize: 10, weight: .heavy)
         return this
     }()
     private let dateLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
-        this.backgroundColor = .lightGray
-        this.text = "May 6, 10:30"
         return this
     }()
     let photoView: UIImageView = {
         let this = UIImageView()
         this.translatesAutoresizingMaskIntoConstraints = false
         this.backgroundColor = .blue.withAlphaComponent(0.1)
+        return this
+    }()
+    private let dateFormatter: DateFormatter = {
+        let this = DateFormatter()
+        this.dateFormat = "MMM d YYYY, h:mm a"
         return this
     }()
     
@@ -166,7 +165,8 @@ final class InvoiceDetailsView: UIView {
             valueTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
             valueTf.trailingAnchor.constraint(equalTo: currencyTf.leadingAnchor, constant: -5),
             valueTf.heightAnchor.constraint(equalToConstant: 30),
-            valueTf.widthAnchor.constraint(equalToConstant: 30),
+            valueTf.widthAnchor.constraint(greaterThanOrEqualToConstant: 30),
+            valueTf.leadingAnchor.constraint(greaterThanOrEqualTo: valueLabel.trailingAnchor, constant: 5),
             
             currencyTf.topAnchor.constraint(equalTo: valueLabel.topAnchor),
             currencyTf.trailingAnchor.constraint(lessThanOrEqualTo: dateLabel.trailingAnchor),
@@ -187,13 +187,19 @@ final class InvoiceDetailsView: UIView {
         ])
     }
     
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
-        // TODO: Check if we will need this
-        let dateFormatter: DateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy hh:mm a"
-    }
-    
     @objc func backButtonTapped(sender: UIButton) {
         delegate?.goBack()
+    }
+
+    func updateWith(invoice: InvoiceModel) {
+        titleTf.text = invoice.title
+        locationTf.text = invoice.location
+        valueTf.text = invoice.value
+        currencyTf.text = invoice.currency
+        dateLabel.text = dateFormatter.string(from: invoice.date)
+        if let imageData = invoice.image,
+           let image = UIImage(data: imageData) {
+            photoView.image = image
+        }
     }
 }

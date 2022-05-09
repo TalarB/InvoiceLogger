@@ -48,15 +48,32 @@ extension CreateInvoiceViewController: CreateInvoiceViewDelegate {
         coordinator?.addPhoto()
     }
     
-    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: (() -> ())?) {
+    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: ((Bool) -> ())?) {
+        contentView.activityIndicator.startAnimating()
+        contentView.isUserInteractionEnabled = false
         if let title = title, title != "",
            let location = location, location != "",
            let value = value, value != "",
            let currency = currency, currency != "",
            let date = date {
-            viewModel.saveInvoice(title: title, location: location, value: value, currency: currency, date: date, image: image)
-            completion?()
+            viewModel.saveInvoice(title: title, location: location, value: value, currency: currency, date: date, image: image) { [weak self] didSucceed in
+                if didSucceed {
+                    self?.coordinator?.close()
+                    self?.contentView.activityIndicator.stopAnimating()
+                } else {
+                    self?.contentView.isUserInteractionEnabled = true
+                    self?.contentView.activityIndicator.stopAnimating()
+                    let alertController = UIAlertController(title: "Saving failed", message: nil, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                        alertController.dismiss(animated: true, completion: nil)})
+                    alertController.addAction(okAction)
+                    alertController.message = "Something went wrong while saving, please try again later."
+                    self?.present(alertController, animated: true, completion: nil)
+                }
+            }
         } else {
+            contentView.isUserInteractionEnabled = true
+            contentView.activityIndicator.stopAnimating()
             let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
                 alertController.dismiss(animated: true, completion: nil)})

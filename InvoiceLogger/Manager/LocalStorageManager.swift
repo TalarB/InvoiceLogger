@@ -9,11 +9,11 @@ import UIKit
 import CoreData
 
 protocol StorageManager: AnyObject {
-    func saveInvoice(_ invoice: Invoice)
+    func saveInvoice(_ invoice: Invoice, completion: ((Bool) -> ())?)
     func getSavedInvoices() throws -> [Invoice]
 }
 
-final class LocalStorageManager: StorageManager {
+final class LocalStorageManager: StorageManager {    
     static let shared = LocalStorageManager()
 
     private var container: NSPersistentContainer!
@@ -28,17 +28,19 @@ final class LocalStorageManager: StorageManager {
         }
     }
 
-    private func saveContext() {
+    private func saveContext(completion: ((Bool) -> ())?) {
         if container.viewContext.hasChanges {
             do {
                 try container.viewContext.save()
+                completion?(true)
             } catch {
+                completion?(false)
                 print("An error occurred while saving: \(error)")
             }
         }
     }
 
-    func saveInvoice(_ invoice: Invoice) {
+    func saveInvoice(_ invoice: Invoice, completion: ((Bool) -> ())?) {
         DispatchQueue.main.async { [weak self] in
             guard let strongSelf = self else {
                 return
@@ -50,7 +52,7 @@ final class LocalStorageManager: StorageManager {
             invoiceModel.currency = invoice.currency
             invoiceModel.image = invoice.image?.pngData()
             invoiceModel.date = invoice.date
-            strongSelf.saveContext()
+            strongSelf.saveContext(completion: completion)
         }
     }
 

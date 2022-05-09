@@ -15,8 +15,8 @@ final class CreateInvoiceViewModel {
         self.storageManager = storageManager
     }
 
-    func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?) {
+    func saveInvoice(title: String, location: String, value: String, currency: String, date: Date, image: UIImage?, completion: ((Bool) -> ())?) {
         let invoice = Invoice(title: title, location: location, date: date, image: image, value: value, currency: currency)
-        storageManager.saveInvoice(invoice)
+        storageManager.saveInvoice(invoice, completion: completion)
     }
 }

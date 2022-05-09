@@ -8,11 +8,6 @@
 import UIKit
 
 final class InvoicesTableView: UIView {
-    let loadingIndicator: UIActivityIndicatorView = {
-        let this = UIActivityIndicatorView()
-        this.tintColor = .blue.withAlphaComponent(0.5)
-        return this
-    }()
     let errorLabel: UILabel = {
         let this = UILabel()
         this.translatesAutoresizingMaskIntoConstraints = false
@@ -44,10 +39,8 @@ final class InvoicesTableView: UIView {
 
     private func setupView() {
         tableView.separatorColor = .blue.withAlphaComponent(0.4)
-        loadingIndicator.tintColor = .blue.withAlphaComponent(0.4)
         addSubview(tableView)
         addSubview(errorLabel)
-        addSubview(loadingIndicator)
     }
 
     private func setupLayout() {
@@ -56,11 +49,6 @@ final class InvoicesTableView: UIView {
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-
-            loadingIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loadingIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
-            loadingIndicator.widthAnchor.constraint(equalToConstant: 60),
-            loadingIndicator.heightAnchor.constraint(equalTo: loadingIndicator.widthAnchor),
 
             errorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             errorLabel.centerYAnchor.constraint(equalTo: centerYAnchor),

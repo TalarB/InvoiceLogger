@@ -38,7 +38,6 @@ final class InvoicesTableViewController: UIViewController {
         contentView.tableView.delegate = self
         contentView.tableView.allowsSelection = true
         contentView.tableView.register(InvoiceCell.self, forCellReuseIdentifier: cellIdentifier)
-        contentView.loadingIndicator.startAnimating()
         viewModel.delegate = self
         viewModel.getInvoices()
     }
@@ -63,15 +62,11 @@ final class InvoicesTableViewController: UIViewController {
 extension InvoicesTableViewController: InvoiceTableViewModelDelegate {
     func invoiceTableViewModel(_ viewModel: InvoicesTableViewModel, didLoad invoices: [Invoice]) {
         contentView.errorLabel.isHidden = true
-        contentView.loadingIndicator.stopAnimating()
-        contentView.loadingIndicator.removeFromSuperview()
         refreshControl.endRefreshing()
         contentView.tableView.reloadData()
     }
     
     func invoicesTableViewModel(_ viewModel: InvoicesTableViewModel, didFailLoading message: String) {
-        contentView.loadingIndicator.stopAnimating()
-        contentView.loadingIndicator.removeFromSuperview()
         contentView.errorLabel.text = message
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 protocol CreateInvoiceViewDelegate: AnyObject {
     func goBack()
-    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: (() -> ())?)
+    func saveInvoice(title: String?, location: String?, value: String?, currency: String?, date: Date?, image: UIImage?, completion: ((Bool) -> ())?)
     func addPhoto()
 }
 
@@ -18,6 +18,13 @@ final class CreateInvoiceView: UIView {
     var currencyPickerOptions: [String] = []
     private var selectedCurrency: String = "DKK" // Initial value
 
+    let activityIndicator: UIActivityIndicatorView = {
+        let this = UIActivityIndicatorView()
+        this.translatesAutoresizingMaskIntoConstraints = false
+        this.tintColor = .blue.withAlphaComponent(0.5)
+        this.hidesWhenStopped = true
+        return this
+    }()
     private let topBackgroundView: UIView = {
         let this = UIView()
         this.translatesAutoresizingMaskIntoConstraints = false
@@ -141,6 +148,7 @@ final class CreateInvoiceView: UIView {
         addGestureRecognizer(tap)
 
         addSubview(topBackgroundView)
+        addSubview(activityIndicator)
         topBackgroundView.addSubview(newInvoiceLabel)
         topBackgroundView.addSubview(backButton)
         addSubview(scrollView)
@@ -218,19 +226,24 @@ final class CreateInvoiceView: UIView {
             addPhotoButton.heightAnchor.constraint(equalToConstant: 35),
             photoView.topAnchor.constraint(equalTo: addPhotoButton.bottomAnchor, constant: 8),
             photoView.heightAnchor.constraint(equalToConstant: 300),
-            photoView.widthAnchor.constraint(equalToConstant: 200),
+            photoView.widthAnchor.constraint(equalToConstant: 220),
             photoView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
             deletePhotoButton.leadingAnchor.constraint(equalTo: photoView.trailingAnchor, constant: 20),
             deletePhotoButton.centerYAnchor.constraint(equalTo: photoView.centerYAnchor),
-            deletePhotoButton.heightAnchor.constraint(equalToConstant: 50),
-            deletePhotoButton.widthAnchor.constraint(equalToConstant: 50),
+            deletePhotoButton.heightAnchor.constraint(equalToConstant: 35),
+            deletePhotoButton.widthAnchor.constraint(equalToConstant: 35),
             deletePhotoButton.trailingAnchor.constraint(lessThanOrEqualTo: fieldsView.trailingAnchor),
 
             saveButton.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 35),
             saveButton.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             saveButton.widthAnchor.constraint(equalToConstant: 200),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
-            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20)
+            saveButton.bottomAnchor.constraint(lessThanOrEqualTo: scrollView.bottomAnchor, constant: -20),
+
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 60),
+            activityIndicator.heightAnchor.constraint(equalTo: activityIndicator.widthAnchor)
         ])
     }
 
@@ -251,20 +264,10 @@ final class CreateInvoiceView: UIView {
         if let title = titleTf.text,
            let location = locationTf.text,
            let value = valueTf.text {
-            delegate?.saveInvoice(title: title, location: location, value: value, currency: selectedCurrency, date: datePicker.date, image: photoView.image) { [weak self] in
-                self?.delegate?.goBack()
-            }
-        } else {
-            let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
-                alertController.dismiss(animated: true, completion: nil)})
-            alertController.addAction(okAction)
-            if titleTf.text == nil {
-                alertController.message = "An invoice cannot be saved without a title."
-            } else if locationTf.text == nil {
-                alertController.message = "An invoice cannot be saved without a location."
-            } else if valueTf.text == nil {
-                alertController.message = "An invoice cannot be saved without specifying a value."
+            delegate?.saveInvoice(title: title, location: location, value: value, currency: selectedCurrency, date: datePicker.date, image: photoView.image) { [weak self] didSucceed in
+                if didSucceed {
+                    self?.delegate?.goBack()
+                }
             }
         }
     }

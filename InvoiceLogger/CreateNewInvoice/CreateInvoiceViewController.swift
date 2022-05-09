@@ -63,31 +63,29 @@ extension CreateInvoiceViewController: CreateInvoiceViewDelegate {
                 } else {
                     self?.contentView.isUserInteractionEnabled = true
                     self?.contentView.activityIndicator.stopAnimating()
-                    let alertController = UIAlertController(title: "Saving failed", message: nil, preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                    let alertController = UIAlertController(title: AlertStrings.savingFailedTitle, message: nil, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: AlertStrings.okActionTitle, style: .default, handler: { _ in
                         alertController.dismiss(animated: true, completion: nil)})
                     alertController.addAction(okAction)
-                    alertController.message = "Something went wrong while saving, please try again later."
+                    alertController.message = AlertStrings.savingFailedMessage
                     self?.present(alertController, animated: true, completion: nil)
                 }
             }
         } else {
             contentView.isUserInteractionEnabled = true
             contentView.activityIndicator.stopAnimating()
-            let alertController = UIAlertController(title: "Incomplete info", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: AlertStrings.incompleteInfoTitle, message: nil, preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: { _ in
                 alertController.dismiss(animated: true, completion: nil)})
             alertController.addAction(okAction)
             if title == "" {
-                alertController.message = "An invoice cannot be saved without a title."
+                alertController.message = AlertStrings.missingTitleMessage
             } else if location == "" {
-                alertController.message = "An invoice cannot be saved without a location."
+                alertController.message = AlertStrings.missingLocationMessage
             } else if value == "" {
-                alertController.message = "An invoice cannot be saved without specifying a value."
-            } else if currency == "" {
-                alertController.message = "An invoice cannot be saved without specifying a currency."
+                alertController.message = AlertStrings.missingValueMessage
             } else if date == nil {
-                alertController.message = "An invoice cannot be saved without a date"
+                alertController.message = AlertStrings.missingDateMessage
             }
             present(alertController, animated: true, completion: nil)
         }
@@ -95,6 +93,17 @@ extension CreateInvoiceViewController: CreateInvoiceViewDelegate {
     
     func goBack() {
         coordinator?.close()
+    }
+
+    struct AlertStrings {
+        static let incompleteInfoTitle = "Incomplete Info"
+        static let savingFailedTitle = "Saving failed"
+        static let savingFailedMessage = "Something went wrong while saving, please try again later."
+        static let missingTitleMessage = "An invoice cannot be saved without a title."
+        static let missingLocationMessage = "An invoice cannot be saved without a location."
+        static let missingValueMessage = "An invoice cannot be saved without specifying a value."
+        static let missingDateMessage = "An invoice cannot be saved without a date"
+        static let okActionTitle = "Ok"
     }
 }
 

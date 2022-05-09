@@ -16,6 +16,7 @@ Due to time limitations, the following are not supported:
 - Adding multiple photos for the same invoice
 - Getting to see the image in full size when tapping on it
 - Only a few currencies are supported
+- Strings are not localized and are hardcoded where needed
 
 
 **Nice to have**
@@ -26,3 +27,4 @@ Additionally to the limitations, it would have been nice to have the following:
       - set allowed currencies
       - turn on saving images in the photo gallery
 - Organizing the table view by days, where all inputs for the same day are shown within one section
+- Single entity or enum that takes care of strings and localizations
